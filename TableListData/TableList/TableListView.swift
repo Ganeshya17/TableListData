@@ -15,9 +15,10 @@ class TableListView: UIView {
     let tableView = UITableView()
     override init(frame: CGRect) {
         super.init(frame: frame)
-        onCreate()
+        onCreateTable()
     }
-    func onCreate() {
+    // TableView Create function
+    func onCreateTable() {
         self.addSubview(mainView)
         mainView.addSubview(tableView)
         tableView.backgroundColor = .white

@@ -16,23 +16,25 @@ class TableListCell: UITableViewCell {
     let lblDescription = UILabel()
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
-        onCreate()
+        onCreateCell()
     }
+    // cell view data loading function
     func confogCellData(row:[Row],index:Int) {
         self.lblTittle.text = row[index].title
         self.lblDescription.text = row[index].rowDescription
         // check this decode
         print("image",row[index].imageHref ?? "")
-        let urlImage = row[index].imageHref ?? "".urlDncode()
-        print("image",urlImage)
-        self.img.sd_setImage(with: URL(string: urlImage), placeholderImage: nil, options: .refreshCached, completed: nil)
+        let urlImage = row[index].imageHref ?? "".urlDecode()
+        print("image1",urlImage)
+       self.img.sd_setImage(with: URL(string: urlImage), placeholderImage: nil, options: .refreshCached, completed: nil)
     }
     required init?(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
 }
 extension TableListCell {
-    func onCreate() {
+     // TableView Cell Create function
+    func onCreateCell() {
         self.selectionStyle = .none
         contentView.addSubview(cellView)
         cellView.addSubview(img)

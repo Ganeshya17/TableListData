@@ -22,6 +22,7 @@ class TableListVC: UIViewController {
         // Do any additional setup after loading the view.
         setup()
     }
+    // View setUp function
     func setup() {
         self.view.addSubview(tableListView)
         tableListView.snp.makeConstraints {
@@ -42,6 +43,9 @@ class TableListVC: UIViewController {
         // Code to refresh table view
         viewModelList.getListdata()
     }
+    /**
+     Call this function to get TableList values
+     */
     func config() {
         viewModelList.onSuccess = { [weak self] (response) in
             DispatchQueue.main.async {
@@ -53,16 +57,16 @@ class TableListVC: UIViewController {
     }
 }
 
-extension TableListVC: UITableViewDelegate, UITableViewDataSource { // Table List data Loading
-    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+extension TableListVC: UITableViewDelegate, UITableViewDataSource {
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int { // TableList data count function
         return viewModelList.listModelData?.rows.count ?? 0
     }
-    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell { // cell data disply function
         let cell:TableListCell = tableView.dequeueReusableCell(withIdentifier: AppConstant.cellIdentifier, for: indexPath) as! TableListCell
         cell.confogCellData(row: viewModelList.listModelData?.rows ?? [], index: indexPath.row)
         return cell
     }
-    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat { // Dynamic Cell method
         return UITableView.automaticDimension
     }
 }
