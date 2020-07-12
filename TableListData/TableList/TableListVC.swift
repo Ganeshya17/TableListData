@@ -42,23 +42,6 @@ class TableListVC: UIViewController {
         // Code to refresh table view
         viewModelList.getListdata()
     }
-    func json() {
-        let url = Bundle.main.url(forResource: "Tabledata", withExtension: "json")!
-        do {
-            let jsonData = try Data(contentsOf: url)
-            let str = String(decoding: jsonData, as: UTF8.self) // convert json into string
-            let data = str.data(using: .utf8)!
-            if let json = try JSONSerialization.jsonObject(with: data, options : .allowFragments) as? [String:Any] {
-                let jsonData = try JSONSerialization.data(withJSONObject: json, options: .prettyPrinted)
-                staticJsonResponse = try JSONDecoder().decode(TableListModel.self, from: jsonData)
-                print(staticJsonResponse?.title ?? "")
-            } else {
-                print("json error")
-            }
-        } catch {
-            print(error)
-        }
-    }
     func config() {
         viewModelList.onSuccess = { [weak self] (response) in
             DispatchQueue.main.async {

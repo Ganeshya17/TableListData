@@ -13,8 +13,11 @@ struct AppConstant {
     static let pullToRefresh = "Pull to refresh"
 }
 
-extension String {
-    func urlDncode() -> String {
+extension String {     // String Enocde & Decode function
+    func urlEncode() -> String {
         return self.addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed) ?? self
+    }
+    func urlDecode() -> String {
+        return self.removingPercentEncoding ?? self
     }
 }

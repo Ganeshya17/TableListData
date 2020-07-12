@@ -104,12 +104,20 @@
 			path = Pods;
 			sourceTree = "<group>";
 		};
-		9E5BA37424B8F4D000B90C41 /* JSON */ = {
+		9EB8066224BB436D00B808D4 /* Cases */ = {
+			isa = PBXGroup;
+			children = (
+				9EFDA0A624B897C3001007EF /* TableListDataTests.swift */,
+			);
+			path = Cases;
+			sourceTree = "<group>";
+		};
+		9EB8066324BB437800B808D4 /* Data */ = {
 			isa = PBXGroup;
 			children = (
 				9E5BA37524B8F51A00B90C41 /* Tabledata.json */,
 			);
-			path = JSON;
+			path = Data;
 			sourceTree = "<group>";
 		};
 		9EFDA08524B897C2001007EF = {
@@ -139,7 +147,6 @@
 			children = (
 				9EFDA09124B897C2001007EF /* AppDelegate.swift */,
 				9EFDA09324B897C2001007EF /* ViewController.swift */,
-				9E5BA37424B8F4D000B90C41 /* JSON */,
 				9EFDA0CA24B8BB12001007EF /* Constant */,
 				9EFDA0BF24B8B99E001007EF /* TableList */,
 				9EFDA09524B897C2001007EF /* Main.storyboard */,
@@ -153,8 +160,9 @@
 		9EFDA0A524B897C3001007EF /* TableListDataTests */ = {
 			isa = PBXGroup;
 			children = (
-				9EFDA0A624B897C3001007EF /* TableListDataTests.swift */,
 				9EFDA0A824B897C3001007EF /* Info.plist */,
+				9EB8066224BB436D00B808D4 /* Cases */,
+				9EB8066324BB437800B808D4 /* Data */,
 			);
 			path = TableListDataTests;
 			sourceTree = "<group>";

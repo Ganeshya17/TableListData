@@ -11,6 +11,7 @@ import Foundation
 class ServiceClass: NSObject {
     static let Session = ServiceClass()
     public var listResponse:TableListModel?
+    // Global Service function
     public func getService(responseHandler: @escaping ((_ response: TableListModel? ,_ error: String)-> Swift.Void)) {
         guard let url = URL(string: AppConstant.serviceUrl)  else {
             return
