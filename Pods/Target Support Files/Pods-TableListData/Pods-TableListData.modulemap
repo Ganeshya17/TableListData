@@ -1,0 +1,6 @@
+framework module Pods_TableListData {
+  umbrella header "Pods-TableListData-umbrella.h"
+
+  export *
+  module * { export * }
+}
