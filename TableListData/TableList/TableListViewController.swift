@@ -10,19 +10,18 @@ import UIKit
 import SDWebImage
 import SnapKit
 
-class TableListVC: UIViewController {
+class TableListViewController: UIViewController {
     let tableListView = TableListView()
     var refreshControl = UIRefreshControl()
-    let appdelegate = AppDelegate()
-    var value = 0
     var viewModelList = TableListViewModel()
-    var staticJsonResponse: TableListModel?
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view.
         setup()
     }
-    // View setUp function
+    /**
+     To  setUoTableView setUp function
+     */
     func setup() {
         self.view.addSubview(tableListView)
         tableListView.snp.makeConstraints {
@@ -39,8 +38,10 @@ class TableListVC: UIViewController {
         viewModelList.getListdata()
         config()
     }
+    /**
+        To refresh table view
+     */
     @objc func refresh(_ sender: AnyObject) {
-        // Code to refresh table view
         viewModelList.getListdata()
     }
     /**
@@ -57,16 +58,27 @@ class TableListVC: UIViewController {
     }
 }
 
-extension TableListVC: UITableViewDelegate, UITableViewDataSource {
-    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int { // TableList data count function
+extension TableListViewController: UITableViewDelegate, UITableViewDataSource {
+    /**
+       TableList data count function
+     */
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return viewModelList.listModelData?.rows.count ?? 0
     }
-    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell { // cell data disply function
-        let cell:TableListCell = tableView.dequeueReusableCell(withIdentifier: AppConstant.cellIdentifier, for: indexPath) as! TableListCell
-        cell.confogCellData(row: viewModelList.listModelData?.rows ?? [], index: indexPath.row)
+    /**
+      cell data disply function
+     */
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        let cell: TableListCell = TableListCell(style: UITableViewCell.CellStyle.default, reuseIdentifier: AppConstant.cellIdentifier)
+        if  let row = viewModelList.listModelData?.rows[indexPath.row] {
+            cell.configure(viewModel: row )
+        }
         return cell
     }
-    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat { // Dynamic Cell method
+    /**
+     Dynamic Cell method
+     */
+    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         return UITableView.automaticDimension
     }
 }

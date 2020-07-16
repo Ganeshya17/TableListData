@@ -11,13 +11,21 @@ import Foundation
 class ServiceClass: NSObject {
     static let Session = ServiceClass()
     public var listResponse:TableListModel?
-    // Global Service function
+    /**
+     Global Service function
+     */
     public func getService(responseHandler: @escaping ((_ response: TableListModel? ,_ error: String)-> Swift.Void)) {
         guard let url = URL(string: AppConstant.serviceUrl)  else {
             return
         }
         let session = URLSession.shared
         let task = session.dataTask(with: url, completionHandler: { data, response, error -> Void in
+            guard let statusCode = (response as? HTTPURLResponse)?.statusCode else {
+                return
+            }
+            if statusCode != 200 {
+                return
+            }
             guard let data = data else {
                 return
             }

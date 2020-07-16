@@ -10,14 +10,18 @@ import XCTest
 @testable import TableListData
 
 class TableListDataTests: XCTestCase {
-
-    let Vc = TableListVC()
-    let Cell = TableListCell()
+    let viewController = TableListViewController()
     var staticJsonResponse: TableListModel?
-    
+    let tablView = UITableView()
     override func setUp() {
         super.setUp()
+        viewController.loadView()
+        viewController.viewDidLoad()
+        tablView.register(TableListCell.self, forCellReuseIdentifier: AppConstant.cellIdentifier)
         json()
+    }
+    override func tearDown() {
+        super.tearDown()
     }
     func json() {
         let url = Bundle.main.url(forResource: "Tabledata", withExtension: "json")!
@@ -34,6 +38,18 @@ class TableListDataTests: XCTestCase {
         } catch {
             print(error)
         }
+    }
+    
+    func testHasATableView() {
+        XCTAssertNotNil(viewController.tableListView.tableView)
+        XCTAssert(viewController.tableListView.tableView.numberOfRows(inSection: 0) > 0)
+    }
+
+    func testTableViewConfromsToTableViewDelegateProtocol() {
+        XCTAssertTrue(viewController.conforms(to: UITableViewDelegate.self))
+    }
+    func testTableViewConfromsToTableViewDataSourceProtocol() {
+        XCTAssertTrue(viewController.conforms(to: UITableViewDataSource.self))
     }
     func testCase(){
         XCTAssert(staticJsonResponse?.rows.count == 14, "Json response count not equal")
@@ -110,5 +126,5 @@ class TableListDataTests: XCTestCase {
         XCTAssertEqual(staticJsonResponse?.rows[13].rowDescription ?? "" , "Nous parlons tous les langues importants.")
         XCTAssertEqual(staticJsonResponse?.rows[13].imageHref ?? "" , "")
     }
-
 }
+

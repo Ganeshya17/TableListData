@@ -12,8 +12,10 @@ struct AppConstant {
     static let serviceUrl = "https://dl.dropboxusercontent.com/s/2iodh4vg0eortkl/facts.json"
     static let pullToRefresh = "Pull to refresh"
 }
-
-extension String {     // String Enocde & Decode function
+/**
+String Enocde & Decode function
+ */
+extension String {
     func urlEncode() -> String {
         return self.addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed) ?? self
     }
